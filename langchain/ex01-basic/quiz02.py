@@ -11,6 +11,10 @@ llm = ChatBedrockConverse(
     model=os.getenv("BEDROCK_MODEL_ID"),
     region_name=os.getenv("AWS_DEFAULT_REGION"),
 )
+llm_nova = ChatBedrockConverse(
+    model=os.getenv("BEDROCK_MODEL_ID2"),
+    region_name=os.getenv("AWS_DEFAULT_REGION"),
+)
 
 print("=== exit 종료 ===")
 
@@ -29,9 +33,15 @@ while True:
         """),
         HumanMessage(content=q)
     ]
+    print("=== nova 2 ===")
     result = llm.stream( messages )
     for chunk in result:
         print( chunk.text , end="" )
+    
+    print("\n=== nova 1 ===")
+    result = llm_nova.invoke( messages )
+    print( result.content )
+    
 
 
 
