@@ -1,9 +1,10 @@
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
+#from dotenv import load_dotenv
 
 from llm_config import get_llm
-
+#load_dotenv()
 llm = get_llm()
 
 prompt = ChatPromptTemplate([
