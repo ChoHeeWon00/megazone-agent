@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser, PydanticOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from llm_config import get_llm
 
@@ -11,7 +11,7 @@ class Recipe(BaseModel):
     dish : str = Field(description="요리 이름")
     minutes : int = Field(description="조리 시간(분)")
     ingredient : list[Ingredient] = Field(description="재료 목록")
-parser = JsonOutputParser( pydantic_object=Recipe )
+parser = PydanticOutputParser( pydantic_object=Recipe )
 
 prompt = ChatPromptTemplate.from_messages([
     ("system","""
@@ -30,6 +30,11 @@ r = chain.invoke({"food":"김치볶음밥"})
 
 print( r )
 print("--")
+print(f"요리 : {r.dish} / {r.minutes} 분")
+for ing in r.ingredient:
+    print(f"- {ing.name} : {ing.amount}")
+'''
 print(f"요리 : {r['dish']} / {r['minutes']} 분")
 for ing in r['ingredient']:
     print(f"- {ing['name']} : {ing['amount']}")
+'''
