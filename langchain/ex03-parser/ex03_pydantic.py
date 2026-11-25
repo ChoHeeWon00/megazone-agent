@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 from llm_config import get_llm
 
-llm = get_llm()
+
 
 class Review(BaseModel):
     sentiment : str = Field(description="상/중/하 중 하나")
@@ -14,6 +14,8 @@ class Review(BaseModel):
 
 parser = PydanticOutputParser( pydantic_object = Review)
 print( parser.get_format_instructions() )
+
+llm = get_llm()
 
 prompt = ChatPromptTemplate.from_messages([
     ("system","너는 리뷰 분석기야. 반드시 아래 형식의 JSON으로만 답해.\n{test_format}"),
