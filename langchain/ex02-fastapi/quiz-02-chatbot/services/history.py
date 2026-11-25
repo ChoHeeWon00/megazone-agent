@@ -6,6 +6,7 @@ _store : dict[ str, list ] = {}
 _store = {
     "aaa":[human(내이름 홍길동), ai( 반가원 길동아)],
     "bbb":[]
+    "ccc":[]
 }
 _store.get( user_id ) => []
 """

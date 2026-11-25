@@ -10,4 +10,3 @@ async def get_chat(req : str, username:str):
             ai_msg += token 
             yield token
     add_turn(username, req, ai_msg) #req(사용자 입력값), ai_msg(llm 응답)   
-
