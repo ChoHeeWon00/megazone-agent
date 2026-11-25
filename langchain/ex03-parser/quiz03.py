@@ -14,9 +14,7 @@ class Task(BaseModel):
 class Plan(BaseModel):
     project: str = Field(description="프로젝트 이름")
     tasks: list[Task] = Field(description="할 일 목록")
-
 parser = PydanticOutputParser(pydantic_object=Plan)
-
 llm = get_llm()
 
 prompt = ChatPromptTemplate.from_messages([
