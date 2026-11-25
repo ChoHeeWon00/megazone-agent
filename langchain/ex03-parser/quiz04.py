@@ -15,8 +15,10 @@ parser = PydanticOutputParser(pydantic_object=Ticket)
 llm = get_llm()
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """너는 문의 메일 자동 분류기야. 메일 본문을 분석해서
-                    반드시 아래 형식의 JSON으로만 답해.\n{format}"""),
+    ("system", """
+                너는 문의 메일 자동 분류기야. 
+                메일 본문을 분석해서 반드시 아래 형식의 JSON으로만 답해.
+                {format}"""),
     ("human", "{email}"),
 ]).partial(format=parser.get_format_instructions())
 
@@ -41,4 +43,4 @@ for i, email in enumerate(emails, 1):
           f"- 우선순위: {priority_text}\n"
           f"- 요약: {ticket.summary}\n"
           f"- 키워드: {ticket.keywords}")
-    print("-" * 60)
+    print("-" * 40)
