@@ -6,9 +6,9 @@ from llm_config import get_llm
 
 # 할 일 하나 (중첩 모델)
 class Task(BaseModel):
-    title: str = Field(description="할 일 내용 (예: 디자인, 개발)")
+    title: str = Field(description="할 일 내용 (예: 시안, DB설계)")
     owner: str = Field(description="담당자 이름")
-    due: str = Field(description="기한 (예: 수요일, 금요일)")
+    due: str = Field(description="기한 (예: 월요일, 화요일)")
 
 # 전체 계획 (Task 리스트를 가짐)
 class Plan(BaseModel):
