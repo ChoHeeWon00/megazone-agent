@@ -19,7 +19,8 @@ prompt = ChatPromptTemplate.from_messages([
     ("human",[
         {"type": "text",
          "text": "정보를 추출해줘."},
-        {"type":"image", "base64":"{b64}", "mime_type":"{type}"},
+        {"type":"image", "base64":"{b64}", 
+                            "mime_type":"{type}"},
     ])
 ])
 # 3. 비전 모델
