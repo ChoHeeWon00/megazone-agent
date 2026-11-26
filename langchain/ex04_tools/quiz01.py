@@ -18,14 +18,20 @@ def now() -> str:
 print("툴 이름 확인 -> ", multiply.name )
 tools = [ multiply , now ]
 tool_map = {t.name: t for t in tools} #dict 형식 툴 등록
-print("--"*20)
-print("tool map : ", tool_map)
+"""
+tool_dict = {}
+for t in tools:
+    tool_dict[t.name] = t
+"""
 
+#print("--"*20)
+#print("tool map : ", tool_map)
 
 
 print("=="*20)
 llm = get_llm()
 llm_tools = llm.bind_tools(tools)
+#print( llm_tools )
 
 questions = ["3 곱하기 9", "지금 몇 시?", "잘 지내?", ]
 
@@ -36,16 +42,17 @@ for q in questions:
     ]
     ai_msg = llm_tools.invoke( messages )
     print(q)
-    print(f"content : {ai_msg.content}")
-    print(f"tool_calls : {ai_msg.tool_calls}")
-    print("--"*20)
-
-    
+    #print( ai_msg )
+    #print(f"content : {ai_msg.content}")
+    #print(f"tool_calls : {ai_msg.tool_calls}")
+    #print("--"*20)
     if ai_msg.tool_calls:
         messages.append(ai_msg)
         for call in ai_msg.tool_calls:
             result = tool_map[call['name']].invoke(call['args'])
-            messages.append(ToolMessage(content=result, tool_call_id=call['id']))
+            messages.append(
+                ToolMessage(content=result, tool_call_id=call['id'])
+            )
         print(f"content(도구 결과) : {llm.invoke(messages).content}")
     else:
         print(f"content(도구 없는 결과) : {ai_msg.content}")
